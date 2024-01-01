@@ -47,7 +47,7 @@ body {
     color: red;
 }
 
-#disclaimer {
+#disclaimer, #congrats-text {
     width: 100%;
     height: 100%;
     font-size: 20px;
@@ -58,6 +58,10 @@ body {
     opacity: 0%;
     justify-content: center;
     background-color: black;
+}
+
+#congrats-text {
+    opacity: 100%;
 }
 
 #black-screen, #black-screen-game {

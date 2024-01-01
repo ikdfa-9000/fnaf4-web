@@ -9,39 +9,45 @@ let screamerSound = document.getElementById("screamer")
 let breathingSound = document.getElementById("breathing")
 let footstepBonnieSound = document.getElementById("footstep-bonnie")
 let footstepChicaSound = document.getElementById("footstep-chica")
+let doorCloseSound = document.getElementById("door-close")
+let doorOpenSound = document.getElementById("door-open")
+let foxyLeftDoorSound = document.getElementById("foxy-left")
+let foxyRightDoorSound = document.getElementById("foxy-right")
+let foxyBackSound = document.getElementById("foxy-back")
+let clockAlarmSound = document.getElementById("clock-alarm")
 
 function PlaySound(soundobj) {
     soundobj.currentTime = 0;
     soundobj.play();
 }
 
-let lookingStatus = 0
+let lookingStatus = 1
 
 // STATUS - BEDROOM
 
-const lookingCenter = 0
-const lookingLeft = 1
-const lookingRight = 2
-const lookingBack = 3
+const lookingCenter = 1
+const lookingLeft = 2
+const lookingRight = 3
+const lookingBack = 4
 
 // STATUS - DOORS
 
-const lookingLeftDoor = 4
-const lookingRightDoor = 5
-const lookingClosetClose = 6
+const lookingLeftDoor = 5
+const lookingRightDoor = 6
+const lookingClosetClose = 7
 
 let l
 
 let gameVisuals = document.getElementById("game-render")
 let deadScreen = document.getElementById("dead-screen")
-
-let leftButton = document.getElementById("turn-left")
-let rightButton = document.getElementById("turn-right")
-let middleButton = document.getElementById("go-front")
-let backButton = document.getElementById("turn-back")
+let finishScreen = document.getElementById("night-finished")
 
 let animationPlaying = false
 let flashlightWorking = false
+let doorClosed = false
+let isGettingJumpscared = false
+
+var animationInterval
 
 let imageBedroomLeft = "images/tutorials/tutorial-left.png"
 let imageBedroomFront = "images/tutorials/tutorial-front.png"
@@ -49,6 +55,7 @@ let imageBedroomRight = "images/tutorials/tutorial-right.png"
 let imageBedroomBed = "images/tutorials/tutorial-bed.png"
 let imageDoorLeft = "images/tutorials/tutorial-left-door.png"
 let imageDoorRight = "images/tutorials/tutorial-right-door.png"
+let imageCloset = "images/tutorials/tutorial-closet.png"
 
 function hideTips() {
     document.getElementById("hide-button").style.display = "none"
@@ -58,12 +65,17 @@ function hideTips() {
     imageBedroomBed = "images/bed/bed-no-light.png"
     imageDoorLeft = "images/left-door/door-left-enter-18.png"
     imageDoorRight = "images/right-door/right-door-go-15.png"
+    imageCloset = "images/closet/closet-go-13.png"
 }
 // ANIMATIONS - JUMPSCARES
 
 function killAnywhere (frameCount, frameName, pointerDisabler) {
-    pointerDisabler()
+    // pointerDisabler()
+    removeEventListeners()
     stopAllAI()
+    clearInterval(hourInterval)
+    isGettingJumpscared = true
+    animationPlaying = true
     blackScreenGameDiv.style.display = "block"
     let jumpscareBlackout = blackScreenGameDiv.animate(
         blackoutJumpscare, fadeReallyFastTiming
@@ -75,9 +87,12 @@ function killAnywhere (frameCount, frameName, pointerDisabler) {
 }
 
 function animationJumpscareBase (frameCount, frameName, pointerDisabler) {
-    pointerDisabler()
+    clearInterval(animationInterval)
+    clearInterval(hourInterval)
     stopAllAI()
     PlaySound(screamerSound)
+    isGettingJumpscared = true
+    doorClosed = false
     breathingSound.pause()
     l = 1
     lookingStatus = lookingCenter
@@ -94,12 +109,13 @@ function animationJumpscareBase (frameCount, frameName, pointerDisabler) {
             stopAllAI()
             let deadScreenFadeIn = deadScreen.animate(fadeIn, fadeTimingFast)
             deadScreenFadeIn.onfinish = () => {
+                isGettingJumpscared = false
+                animationPlaying = false
                 menuDiv.style.display = "block"
                 gameVisuals.src = imageBedroomFront
                 console.log(gameVisuals)
                 let deadScreenFadeOut = deadScreen.animate(fadeOut, fadeTimingFast)
                 deadScreenFadeOut.onfinish = () => {
-                    animationPlaying = false
                     PlaySound(menuMus)
                     let blackScreenAnimAfterDeath = blackScreenDiv.animate(
                         fadeOut, fadeTiming
@@ -181,7 +197,7 @@ function animationBack (reverse) {
                 lookingStatus = lookingBack
                 gameVisuals.src = imageBedroomBed
                 animationPlaying = false
-
+                console.log(middleButton)
                 middleButton.addEventListener("mousedown", lightBed)
                 middleButton.addEventListener("mouseup", darkBed)
             }
@@ -231,6 +247,7 @@ function animationDoorGetCloser (reverse, frameName, frameCount, lookingSet, lig
         middleButton.removeEventListener("mouseup", darkFunc)
         l = frameCount
     } else {
+        PlaySound(doorOpenSound)
         l = 1
     }
     lookingStatus = lookingSet
@@ -267,7 +284,14 @@ function animationDoorGetCloser (reverse, frameName, frameCount, lookingSet, lig
 // CLOSET
 
 function animationCenterGo (reverse) {
+    imageFrame = "./images/bedroom/bedroom-front-closet-"
     if (reverse) {
+        if (foxyDoor.currpos > 0) {
+            foxyDoor.stopAI()
+            foxyCloset.currpos = 50
+            PlaySound(doorCloseSound)
+            imageFrame = "./images/bedroom/bedroom-front-closet-foxy-"
+        }
         l = 4
     } else {
         l = 1
@@ -283,11 +307,11 @@ function animationCenterGo (reverse) {
                 gameVisuals.src = imageBedroomFront
                 animationPlaying = false
             } else {
-            gameVisuals.src = "./images/bedroom/bedroom-front-closet-" + l + ".png" 
+            gameVisuals.src = imageFrame + l + ".png" 
             l--;
         }
         } else {
-            gameVisuals.src = "./images/bedroom/bedroom-front-closet-" + l + ".png" 
+            gameVisuals.src = imageFrame + l + ".png" 
             l++;
             if (l==5) {
                 l=1
@@ -302,6 +326,8 @@ function animationCenterGo (reverse) {
 
 function animationClosetApproach (reverse = false) {
     if (reverse) {
+        middleButton.removeEventListener("mousedown", lightCloset)
+        middleButton.removeEventListener("mouseup", darkCloset)
         l = 13
     } else {
         l = 1
@@ -321,9 +347,12 @@ function animationClosetApproach (reverse = false) {
         } else {
             if (l==14) {
                 l=1
+                middleButton.addEventListener("mousedown", lightCloset)
+                middleButton.addEventListener("mouseup", darkCloset)
                 clearInterval(animationInterval)
                 lookingStatus = lookingClosetClose
                 animationPlaying = false
+                gameVisuals.src=imageCloset
             } else {
             gameVisuals.src = "./images/closet/closet-go-" + l + ".png" 
             l++;
@@ -334,7 +363,7 @@ function animationClosetApproach (reverse = false) {
 
 // ANIMATIONS - FREDDLES
 
-function freddleAnimShaking(frameName, frameCount, frameCountWithEsc, aiDecrease, aiBorder, pointerDisabler) {
+function freddleAnimShaking(frameName, frameCount, frameCountWithEsc, aiDecrease, aiBorder) {
     l = 1
     let animationInterval = setInterval(animate, 35)
     function animate() {
@@ -382,7 +411,7 @@ function freddyHandler() {
     }
 }
 
-// DOOR ANIM HIDE
+// ANIMATRONIC DOOR ANIM HIDE
 
 function doorAnimatronicAnimHide (frameName, frameCount, imageAfter) {
     l = 1
@@ -396,8 +425,70 @@ function doorAnimatronicAnimHide (frameName, frameCount, imageAfter) {
                 gameVisuals.src = imageAfter
         }
     }
-    else {
-        clearInterval(animationInterval)
+        else {
+            clearInterval(animationInterval)
+        }
     }
+}
+
+function doorCloseBase (frameName, frameCount, reverse, frameAfterReverse, button, funcOpen, direction) {
+    var animationInterval
+    if (reverse) {
+        PlaySound(doorOpenSound)
+        if (direction == lookingLeftDoor) {
+            if (bonnie.currpos >= bonnie.maxpos) {
+                PlaySound(breathingSound)
+            }
+        } else if (direction == lookingRightDoor) {
+            if (chica.currpos >= chica.maxpos) {
+                PlaySound(breathingSound)
+            }
+        } 
+        animationInterval = setInterval(animateReverse, 35);
+    } else {
+        PlaySound(doorCloseSound)
+        l = 1
+        breathingSound.pause()
+        doorClosed = true
+        animationInterval = setInterval(animate, 35);
     }
+    animationPlaying = true
+    function animate() { 
+        if (l==frameCount+1) {
+            l = frameCount
+            button.addEventListener("mouseup", funcOpen)
+            clearInterval(animationInterval)
+        } else if (button.matches(":active")) {
+            gameVisuals.src = frameName + l + ".png" 
+            l++;
+        } else {
+            clearInterval(animationInterval)
+            doorCloseBase(frameName, frameCount, true, frameAfterReverse, button, funcOpen)
+        }
+    } function animateReverse() {
+        button.removeEventListener("mouseup", funcOpen)
+        if (l==0) {
+            l=1
+            clearInterval(animationInterval)
+            doorClosed = false
+            animationPlaying = false
+            gameVisuals.src = frameAfterReverse
+        } else if (!button.matches(":active")) {
+            gameVisuals.src = frameName + l + ".png" 
+            l--;
+        } else {
+            clearInterval(animationInterval)
+            doorCloseBase(frameName, frameCount, false, frameAfterReverse, button, funcOpen)
+        }
+    }
+}
+
+function openLeftDoor (event) {
+    return doorCloseBase("images/left-door/door-left-close-", 10, true, imageDoorLeft, leftButton, openLeftDoor, lookingLeftDoor)
+} 
+function openRightDoor (event) {
+    return doorCloseBase("images/right-door/right-door-close-", 11, true, imageDoorRight, rightButton, openRightDoor, lookingRightDoor)
+}
+function openCloset (event) {
+    return doorCloseBase("images/closet/closet-close-", 5, true, imageCloset, leftButton, openCloset, lookingClosetClose)
 }
