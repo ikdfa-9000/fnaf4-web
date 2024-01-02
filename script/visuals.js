@@ -88,10 +88,12 @@ function killAnywhere (frameCount, frameName, pointerDisabler) {
 
 function animationJumpscareBase (frameCount, frameName, pointerDisabler) {
     clearInterval(animationInterval)
+    removeEventListeners()
     clearInterval(hourInterval)
     stopAllAI()
     PlaySound(screamerSound)
     isGettingJumpscared = true
+    hourCount = 0
     doorClosed = false
     breathingSound.pause()
     l = 1
@@ -117,6 +119,7 @@ function animationJumpscareBase (frameCount, frameName, pointerDisabler) {
                 let deadScreenFadeOut = deadScreen.animate(fadeOut, fadeTimingFast)
                 deadScreenFadeOut.onfinish = () => {
                     PlaySound(menuMus)
+                    document.getElementById("clock").innerText = "12 AM"
                     let blackScreenAnimAfterDeath = blackScreenDiv.animate(
                         fadeOut, fadeTiming
                     )

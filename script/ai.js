@@ -77,15 +77,15 @@ class PassiveAnimatronic {
     }
 }
 
-let freddy = new PassiveAnimatronic(0, 0, 80, 100, 15, "images/jumpscares/freddy-bedroom/freedy-bedroom-", () => { 
+let freddy = new PassiveAnimatronic(4, 0, 80, 100, 15, "images/jumpscares/freddy-bedroom/freedy-bedroom-", () => { 
     middleButton.removeEventListener("mousedown", lightBed);
     middleButton.removeEventListener("mouseup", darkBed); 
 }, 5000)
-let bonnie = new DoorAnimatronic(0, 0, 4, 6, lookingLeftDoor, footstepBonnieSound, 17, "images/jumpscares/bonnie-bedroom/bonnie-bedroom-", () => { 
+let bonnie = new DoorAnimatronic(4, 0, 4, 6, lookingLeftDoor, footstepBonnieSound, 17, "images/jumpscares/bonnie-bedroom/bonnie-bedroom-", () => { 
     middleButton.removeEventListener("mousedown", lightLeft);
     middleButton.removeEventListener("mouseup", darkLeft); 
 }, 5000)
-let chica = new DoorAnimatronic(0, 0, 4, 6, lookingRightDoor, footstepChicaSound, 13, "images/jumpscares/chica-bedroom/chica-bedroom-", () => { 
+let chica = new DoorAnimatronic(4, 0, 4, 6, lookingRightDoor, footstepChicaSound, 13, "images/jumpscares/chica-bedroom/chica-bedroom-", () => { 
     middleButton.removeEventListener("mousedown", lightRight);
     middleButton.removeEventListener("mouseup", darkRight); 
 }, 6000)
@@ -96,7 +96,7 @@ let foxyCloset = new PassiveAnimatronic(0, -1000, 130, 100, 19, "images/jumpscar
 
 let foxyDoor = {
     currpos: 0,
-    ailevel: 0,
+    ailevel: 6,
     directions: [0, foxyLeftDoor, foxyRightDoor],
     directionSounds: [foxyBackSound, foxyLeftDoorSound, foxyRightDoorSound],
     addChance: function() {
