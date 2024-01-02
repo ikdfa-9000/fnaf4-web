@@ -151,12 +151,12 @@ function lightLeft(event) {
             if (foxyDoor.currpos == foxyLeftDoor) {
                 foxyDoor.currpos = 0
             }
-            doorAnimatronicAnimHide("images/left-door/door-left-close-bonnie-go-", 9, "images/left-door/door-left-light-no.jpg")
+            doorAnimatronicAnimHide("images/left-door/door-left-close-bonnie-go-", 9, "images/left-door/door-left-light-no.png")
         } else if (foxyDoor.currpos == foxyLeftDoor) {
             foxyDoor.currpos = 0
-            doorAnimatronicAnimHide("images/left-door/door-left-close-foxy-go-", 6, "images/left-door/door-left-light-no.jpg")
+            doorAnimatronicAnimHide("images/left-door/door-left-close-foxy-go-", 6, "images/left-door/door-left-light-no.png")
         } else {
-            gameVisuals.src = "images/left-door/door-left-light-no.jpg"
+            gameVisuals.src = "images/left-door/door-left-light-no.png"
         }
     }
 }
@@ -181,12 +181,12 @@ function lightRight(event) {
             if (foxyDoor.currpos == foxyRightDoor) {
                 foxyDoor.currpos = 0
             }
-            doorAnimatronicAnimHide("images/right-door/door-right-close-chica-go-", 13, "images/right-door/right-door-light-no.jpg")
+            doorAnimatronicAnimHide("images/right-door/door-right-close-chica-go-", 13, "images/right-door/right-door-light-no.png")
         } else if (foxyDoor.currpos == foxyRightDoor) {
             foxyDoor.currpos = 0
-            doorAnimatronicAnimHide("images/right-door/door-right-close-foxy-go-", 6, "images/right-door/right-door-light-no.jpg")
+            doorAnimatronicAnimHide("images/right-door/door-right-close-foxy-go-", 6, "images/right-door/right-door-light-no.png")
         } else {
-            gameVisuals.src = "images/right-door/right-door-light-no.jpg"
+            gameVisuals.src = "images/right-door/right-door-light-no.png"
         }
     }
 }
@@ -201,15 +201,15 @@ function lightCloset(event) {
         flashlightWorking = true
         PlaySound(lightSound)
         if (foxyCloset.currpos >= 85) {
-            gameVisuals.src = "images/closet/closet-light-foxy-3.jpg"
+            gameVisuals.src = "images/closet/closet-light-foxy-3.png"
         } else if (foxyCloset.currpos >= 50) {
-            gameVisuals.src = "images/closet/closet-light-foxy-2.jpg"
+            gameVisuals.src = "images/closet/closet-light-foxy-2.png"
         } else if (foxyCloset.currpos >= 20) {
-            gameVisuals.src = "images/closet/closet-light-foxy-1.jpg"
+            gameVisuals.src = "images/closet/closet-light-foxy-1.png"
         } else if (foxyCloset.currpos > 0) {
-            gameVisuals.src = "images/closet/closet-light-foxy-0.jpg"
+            gameVisuals.src = "images/closet/closet-light-foxy-0.png"
         } else {
-            gameVisuals.src = "images/closet/closet-light-empty.jpg"
+            gameVisuals.src = "images/closet/closet-light-empty.png"
         }
     }
 }

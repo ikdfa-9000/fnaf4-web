@@ -1,3 +1,49 @@
+let animations = {
+    "bed/bed-freddle-1-": 12,
+    "bed/bed-freddle-2-": 10,
+    "bed/bed-freddle-3-": 8,
+    "bed/bed-from-room-": 10,
+    "bedroom/bedroom-front-back-go-": 16,
+    "bedroom/bedroom-front-closet-": 4,
+    "bedroom/bedroom-front-closet-foxy-": 4,
+    "bedroom/bedroom-front-left-": 4,
+    "bedroom/bedroom-front-left-go-": 5,
+    "bedroom/bedroom-front-right-": 4,
+    "bedroom/bedroom-front-right-go-": 5,
+    "closet/closet-close-": 5,
+    "closet/closet-go-": 13,
+    "jumpscares/bonnie-bedroom/bonnie-bedroom-": 17,
+    "jumpscares/bonnie-door/bonnie-door-": 18,
+    "jumpscares/chica-bedroom/chica-bedroom-": 13,
+    "jumpscares/chica-door/chica-door-": 16,
+    "jumpscares/foxy/foxy-": 19,
+    "jumpscares/freddy-bed/freddy-bed-": 19,
+    "jumpscares/freddy-bedroom/freedy-bedroom-": 15,
+    "left-door/door-left-close-": 10,
+    "left-door/door-left-close-bonnie-go-": 9,
+    "left-door/door-left-close-foxy-go-": 6,
+    "left-door/door-left-enter-": 18,
+    "running/running-": 30,
+    "right-door/door-right-close-chica-go-": 13,
+    "right-door/door-right-close-foxy-go-": 6,
+    "right-door/right-door-close-": 11,
+    "right-door/right-door-go-": 15,
+}
+
+function preloadAllImages () {
+    for (var animation in animations) {
+        if (animations.hasOwnProperty(animation)) {
+            for (let i = 1; i <= animations[animation]; i++) {
+                console.log("images/" + animation + i + ".png")
+                var img=new Image();
+                img.src="images/" + animation + i + ".png";
+            }
+        }
+    }
+}
+
+// preloadAllImages()
+
 const fadeOut = [
     {opacity: "100%"},
     {opacity: "100%"},
@@ -49,60 +95,11 @@ const fadeReallyFastTiming = {
     fill: "forwards"
 };
 
-let animations = {
-    "bed/bed-freddle-1-": 12,
-    "bed/bed-freddle-2-": 10,
-    "bed/bed-freddle-3-": 8,
-    "bed/bed-from-room-": 10,
-    "bedroom/bedroom-front-back-go-": 16,
-    "bedroom/bedroom-front-closet-": 4,
-    "bedroom/bedroom-front-closet-foxy-": 4,
-    "bedroom/bedroom-front-left-": 4,
-    "bedroom/bedroom-front-left-go-": 5,
-    "bedroom/bedroom-front-right-": 4,
-    "bedroom/bedroom-front-right-go-": 5,
-    "closet/closet-close-": 5,
-    "closet/closet-go-": 13,
-    "jumpscares/bonnie-bedroom/bonnie-bedroom-": 17,
-    "jumpscares/bonnie-door/bonnie-door-": 18,
-    "jumpscares/chica-bedroom/chica-bedroom-": 13,
-    "jumpscares/chica-door/chica-door-": 16,
-    "jumpscares/foxy/foxy-": 19,
-    "jumpscares/freddy-bed/freddy-bed-": 19,
-    "jumpscares/freddy-bedroom/freedy-bedroom-": 15,
-    "left-door/door-left-close-": 10,
-    "left-door/door-left-close-bonnie-go-": 9,
-    "left-door/door-left-close-foxy-go-": 6,
-    "left-door/door-left-enter-": 18,
-    "running/running-": 30,
-    "right-door/door-right-close-chica-go-": 13,
-    "right-door/door-right-close-foxy-go-": 6,
-    "right-door/right-door-close-": 11,
-    "right-door/right-door-go-": 15,
-}
-
-function preloadImage(url)
-{
-    var img=new Image();
-    img.src=url;
-}
-function preloadAllImages () {
-    for (var animation in animations) {
-        if (animations.hasOwnProperty(animation)) {
-            for (let i = 1; i <= animations[animation]; i++) {
-                console.log("images/" + animation + i + ".jpg")
-                preloadImage("images/" + animation + i + ".jpg")
-            }
-        }
-    }
-}
-
 const menuDiv = document.getElementById("menu-div")
 const disclaimerDiv = document.getElementById("disclaimer")
 const blackScreenDiv = document.getElementById("black-screen")
 const gameDiv = document.getElementById("game")
 const blackScreenGameDiv = document.getElementById("black-screen-game")
-preloadAllImages()
 const disclaimerAnim = disclaimerDiv.animate(
     fadeInOut, fadeTiming
 )
