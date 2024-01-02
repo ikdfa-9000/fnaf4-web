@@ -59,13 +59,13 @@ let imageCloset = "images/tutorials/tutorial-closet.png"
 
 function hideTips() {
     document.getElementById("hide-button").style.display = "none"
-    imageBedroomLeft = "images/bedroom/bedroom-front-left-4.png"
-    imageBedroomFront = "images/bedroom/bedroom-front.png"
-    imageBedroomRight = "images/bedroom/bedroom-front-right-4.png"
-    imageBedroomBed = "images/bed/bed-no-light.png"
-    imageDoorLeft = "images/left-door/door-left-enter-18.png"
-    imageDoorRight = "images/right-door/right-door-go-15.png"
-    imageCloset = "images/closet/closet-go-13.png"
+    imageBedroomLeft = "images/bedroom/bedroom-front-left-4.jpg"
+    imageBedroomFront = "images/bedroom/bedroom-front.jpg"
+    imageBedroomRight = "images/bedroom/bedroom-front-right-4.jpg"
+    imageBedroomBed = "images/bed/bed-no-light.jpg"
+    imageDoorLeft = "images/left-door/door-left-enter-18.jpg"
+    imageDoorRight = "images/right-door/right-door-go-15.jpg"
+    imageCloset = "images/closet/closet-go-13.jpg"
 }
 // ANIMATIONS - JUMPSCARES
 
@@ -102,7 +102,7 @@ function animationJumpscareBase (frameCount, frameName, pointerDisabler) {
     var animationInterval = setInterval(animate, 40);
     animationPlaying = true
     function animate() { 
-        gameVisuals.src = frameName + l + ".png" 
+        gameVisuals.src = frameName + l + ".jpg" 
         l++;
         if (l==frameCount+1) {
             l=1
@@ -135,7 +135,7 @@ function animationJumpscareBase (frameCount, frameName, pointerDisabler) {
 
 // ANIMATIONS - HALL
 
-function animationStandard (reverse, frameName, frameCount, frameEndReverse = frameName + 1 + ".png", lookingStatusSetReverse, lookingStatusSet, frameEndStandard = frameName + frameCount + ".png") { 
+function animationStandard (reverse, frameName, frameCount, frameEndReverse = frameName + 1 + ".jpg", lookingStatusSetReverse, lookingStatusSet, frameEndStandard = frameName + frameCount + ".jpg") { 
     if (reverse) {
         l = frameCount
     } else {
@@ -152,11 +152,11 @@ function animationStandard (reverse, frameName, frameCount, frameEndReverse = fr
                 gameVisuals.src = frameEndReverse
                 animationPlaying = false
             } else {
-            gameVisuals.src = frameName + l + ".png" 
+            gameVisuals.src = frameName + l + ".jpg" 
             l--;
             }
         } else {
-            gameVisuals.src = frameName + l + ".png" 
+            gameVisuals.src = frameName + l + ".jpg" 
             l++;
             if (l==frameCount+1) {
                 l=1
@@ -188,11 +188,11 @@ function animationBack (reverse) {
                 gameVisuals.src = imageBedroomFront
                 animationPlaying = false
             } else {
-            gameVisuals.src = "./images/bedroom/bedroom-front-back-go-" + l + ".png" 
+            gameVisuals.src = "./images/bedroom/bedroom-front-back-go-" + l + ".jpg" 
             l--;
         }
         } else {
-            gameVisuals.src = "./images/bedroom/bedroom-front-back-go-" + l + ".png" 
+            gameVisuals.src = "./images/bedroom/bedroom-front-back-go-" + l + ".jpg" 
             l++;
             if (l==17) {
                 l=1
@@ -217,7 +217,7 @@ function animationWalk (animation, reverse) {
     var animationInterval = setInterval(animate, 35);
     animationPlaying = true
     function animate() { 
-        gameVisuals.src = "./images/running/running-" + l + ".png" 
+        gameVisuals.src = "./images/running/running-" + l + ".jpg" 
         l++;
         if (l==30) {
             l=1
@@ -233,7 +233,7 @@ function animationDoorsStart (frameName, frameCount, animationApproach) {
     var animationInterval = setInterval(animate, 35);
     animationPlaying = true
     function animate() { 
-        gameVisuals.src = frameName + l + ".png" 
+        gameVisuals.src = frameName + l + ".jpg" 
         l++;
         if (l==frameCount+1) {
             l=1
@@ -244,7 +244,7 @@ function animationDoorsStart (frameName, frameCount, animationApproach) {
     }
 }
 
-function animationDoorGetCloser (reverse, frameName, frameCount, lookingSet, lightFunc, darkFunc, posVal, maxVal, frameEndStandard = frameName + frameCount + ".png") {
+function animationDoorGetCloser (reverse, frameName, frameCount, lookingSet, lightFunc, darkFunc, posVal, maxVal, frameEndStandard = frameName + frameCount + ".jpg") {
     if (reverse) {
         middleButton.removeEventListener("mousedown", lightFunc)
         middleButton.removeEventListener("mouseup", darkFunc)
@@ -263,11 +263,11 @@ function animationDoorGetCloser (reverse, frameName, frameCount, lookingSet, lig
                 clearInterval(animationInterval)
                 animationWalk(animationCenterGo, true)
             } else {
-            gameVisuals.src = frameName + l + ".png" 
+            gameVisuals.src = frameName + l + ".jpg" 
             l--;
         }
         } else {
-            gameVisuals.src = frameName + l + ".png" 
+            gameVisuals.src = frameName + l + ".jpg" 
             l++;
             if (l==frameCount + 1) {
                 l=1
@@ -310,11 +310,11 @@ function animationCenterGo (reverse) {
                 gameVisuals.src = imageBedroomFront
                 animationPlaying = false
             } else {
-            gameVisuals.src = imageFrame + l + ".png" 
+            gameVisuals.src = imageFrame + l + ".jpg" 
             l--;
         }
         } else {
-            gameVisuals.src = imageFrame + l + ".png" 
+            gameVisuals.src = imageFrame + l + ".jpg" 
             l++;
             if (l==5) {
                 l=1
@@ -344,7 +344,7 @@ function animationClosetApproach (reverse = false) {
                 clearInterval(animationInterval)
                 animationWalk(animationCenterGo, true)
             } else {
-            gameVisuals.src = "./images/closet/closet-go-" + l + ".png" 
+            gameVisuals.src = "./images/closet/closet-go-" + l + ".jpg" 
             l--;
         }
         } else {
@@ -357,7 +357,7 @@ function animationClosetApproach (reverse = false) {
                 animationPlaying = false
                 gameVisuals.src=imageCloset
             } else {
-            gameVisuals.src = "./images/closet/closet-go-" + l + ".png" 
+            gameVisuals.src = "./images/closet/closet-go-" + l + ".jpg" 
             l++;
             }
         }
@@ -371,7 +371,7 @@ function freddleAnimShaking(frameName, frameCount, frameCountWithEsc, aiDecrease
     let animationInterval = setInterval(animate, 35)
     function animate() {
         if (flashlightWorking) {    
-            gameVisuals.src = frameName + l + ".png" 
+            gameVisuals.src = frameName + l + ".jpg" 
             l++;
             if (l >= frameCount+1) {
                 console.log(freddy.currpos)
@@ -410,7 +410,7 @@ function freddyHandler() {
     } 
     else { 
         freddleSound.pause()
-        gameVisuals.src = "images/bed/bed.png"
+        gameVisuals.src = "images/bed/bed.jpg"
     }
 }
 
@@ -421,7 +421,7 @@ function doorAnimatronicAnimHide (frameName, frameCount, imageAfter) {
     let animationInterval = setInterval(animate, 35)
     function animate() {
         if (flashlightWorking) {    
-            gameVisuals.src = frameName + l + ".png" 
+            gameVisuals.src = frameName + l + ".jpg" 
             l++;
             if (l >= frameCount+1) {
                 clearInterval(animationInterval)
@@ -462,7 +462,7 @@ function doorCloseBase (frameName, frameCount, reverse, frameAfterReverse, butto
             button.addEventListener("mouseup", funcOpen)
             clearInterval(animationInterval)
         } else if (button.matches(":active")) {
-            gameVisuals.src = frameName + l + ".png" 
+            gameVisuals.src = frameName + l + ".jpg" 
             l++;
         } else {
             clearInterval(animationInterval)
@@ -477,7 +477,7 @@ function doorCloseBase (frameName, frameCount, reverse, frameAfterReverse, butto
             animationPlaying = false
             gameVisuals.src = frameAfterReverse
         } else if (!button.matches(":active")) {
-            gameVisuals.src = frameName + l + ".png" 
+            gameVisuals.src = frameName + l + ".jpg" 
             l--;
         } else {
             clearInterval(animationInterval)
