@@ -8,7 +8,8 @@
     <link rel="icon" href="images/favicon.jpg">
     <title>FNAF 4 Web</title>
 </head>
-<body>
+<body oncontextmenu="return false">
+    
     <audio id="flashlight" autoloop src="audio/light.ogg"></audio>
     <audio id="ambience" autoloop src="audio/ambience.ogg"></audio>
     <audio id="menumusic" autoloop src="audio/menu.ogg"></audio>
@@ -25,7 +26,7 @@
     <audio id="foxy-back" autoloop src="audio/steps_foxy_middle.ogg"></audio> 
     <audio id="clock-alarm" autoloop src="audio/clock-alarm.ogg"></audio> 
     <div id="game">
-        <img src="./images/tutorials/tutorial-front.png" id="game-render">
+        <img src="./images/tutorials/tutorial-front.png" oncontextmenu="return false" id="game-render">
         <p id="clock">12 AM</p>
         <div id="black-screen-game"></div>
         <div id="turn-left" onmousedown="leftClickHandler()" onmouseover="leftLook()" ></div>
