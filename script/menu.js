@@ -1,8 +1,4 @@
 let animations = {
-    "bed/bed-freddle-1-": 12,
-    "bed/bed-freddle-2-": 10,
-    "bed/bed-freddle-3-": 8,
-    "bed/bed-from-room-": 10,
     "bedroom/bedroom-front-back-go-": 16,
     "bedroom/bedroom-front-closet-": 4,
     "bedroom/bedroom-front-closet-foxy-": 4,
@@ -10,8 +6,22 @@ let animations = {
     "bedroom/bedroom-front-left-go-": 5,
     "bedroom/bedroom-front-right-": 4,
     "bedroom/bedroom-front-right-go-": 5,
+    "left-door/door-left-close-": 10,
+    "left-door/door-left-close-bonnie-go-": 9,
+    "left-door/door-left-close-foxy-go-": 6,
+    "left-door/door-left-enter-": 18,
+    "right-door/door-right-close-chica-go-": 13,
+    "right-door/door-right-close-foxy-go-": 6,
+    "right-door/right-door-close-": 11,
+    "right-door/right-door-go-": 15,
+    "running/running-": 30,
+    "bed/bed-freddle-1-": 12,
+    "bed/bed-freddle-2-": 10,
+    "bed/bed-freddle-3-": 8,
+    "bed/bed-from-room-": 10,
     "closet/closet-close-": 5,
     "closet/closet-go-": 13,
+    "closet/closet-light-foxy-": 3,
     "jumpscares/bonnie-bedroom/bonnie-bedroom-": 17,
     "jumpscares/bonnie-door/bonnie-door-": 18,
     "jumpscares/chica-bedroom/chica-bedroom-": 13,
@@ -19,16 +29,30 @@ let animations = {
     "jumpscares/foxy/foxy-": 19,
     "jumpscares/freddy-bed/freddy-bed-": 19,
     "jumpscares/freddy-bedroom/freedy-bedroom-": 15,
-    "left-door/door-left-close-": 10,
-    "left-door/door-left-close-bonnie-go-": 9,
-    "left-door/door-left-close-foxy-go-": 6,
-    "left-door/door-left-enter-": 18,
-    "running/running-": 30,
-    "right-door/door-right-close-chica-go-": 13,
-    "right-door/door-right-close-foxy-go-": 6,
-    "right-door/right-door-close-": 11,
-    "right-door/right-door-go-": 15,
 }
+
+let staticframes = [
+    "bed/bed",
+    "bed/bed-no-light", 
+    "tutorials/tutorial-closet", 
+    "tutorials/tutorial-bed", 
+    "tutorials/tutorial-left-door", 
+    "tutorials/tutorial-left", 
+    "tutorials/tutorial-right-door", 
+    "tutorials/tutorial-right", 
+    "left-door/door-left-light-no",
+    "right-door/right-door-light-no",
+]
+
+function preloadStaticFrames () {
+    for (let frame in staticframes) {
+        console.log("images/" + frame + ".png")
+        var img=new Image();
+        img.src="images/" + frame + ".png";
+    }
+}
+
+preloadStaticFrames()
 
 function preloadAllImages () {
     for (var animation in animations) {
@@ -42,7 +66,7 @@ function preloadAllImages () {
     }
 }
 
-// preloadAllImages()
+preloadAllImages()
 
 const fadeOut = [
     {opacity: "100%"},
