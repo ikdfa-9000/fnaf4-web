@@ -58,6 +58,10 @@ let imageDoorRight = "images/tutorials/tutorial-right-door.png"
 let imageCloset = "images/tutorials/tutorial-closet.png"
 
 function hideTips() {
+    if (hourCount == 0) {
+        addHour()
+        console.log("Shit just got real!")
+    }
     document.getElementById("hide-button").style.display = "none"
     imageBedroomLeft = "images/bedroom/bedroom-front-left-4.png"
     imageBedroomFront = "images/bedroom/bedroom-front.png"

@@ -45,10 +45,10 @@ let staticframes = [
 ]
 
 function preloadStaticFrames () {
-    for (let frame in staticframes) {
-        console.log("images/" + frame + ".png")
+    for (let index = 0; index < staticframes.length; ++index) {
+        console.log("images/" + staticframes[index] + ".png")
         var img=new Image();
-        img.src="images/" + frame + ".png";
+        img.src="images/" + staticframes[index] + ".png";
     }
 }
 
